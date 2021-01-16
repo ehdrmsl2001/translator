@@ -61,7 +61,7 @@ public class Weather {
 
 
     public String[] callWeatherData(String city) {
-        String url="https://openweathermap.org/data/2.5/weather?q="+city+"&appid=439d4b804bc8187953eb36d2a8c26a02";
+        String url = "https://openweathermap.org/data/2.5/weather?q=" + city + "&appid=439d4b804bc8187953eb36d2a8c26a02";
         weatherChecker weatherChecker = new weatherChecker();
         try {
 
@@ -70,8 +70,6 @@ public class Weather {
 
             JSONObject jsonObject = new JSONObject(dataReceived);
 
-            //City Info
-            String cityInfo = jsonObject.getString("name");
             String weatherInfo = jsonObject.getString("weather");
 
             JSONArray arrayInfo = new JSONArray(weatherInfo);
@@ -92,7 +90,7 @@ public class Weather {
             }
 
             if (main.equals("02") || main.equals("03") || main.equals("04")) {
-                maininfo = "흐림";
+                maininfo = "구름";
             }
 
             if (main.equals("09") || main.equals("10") || main.equals("11")) {
@@ -110,8 +108,8 @@ public class Weather {
             //main info
             JSONObject Main = jsonObject.getJSONObject("main");
             String tempData = Main.getString("temp");
-            return new String[]{cityInfo, tempData, maininfo};
-
+            return new String[]{city, tempData + '\u2103', maininfo};
+            //도시 이름,기온,날씨 정보
         } catch (Exception e) {
             e.printStackTrace();
         }
