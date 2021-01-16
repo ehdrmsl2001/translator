@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     EditText et;
     Button bt;
     Translator translator;
+    Weather weather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +42,13 @@ public class MainActivity extends AppCompatActivity {
         bt = findViewById(R.id.button);
         et = findViewById(R.id.et);
         translator = new Translator();
+        weather = new Weather();
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s = translator.translation(et.getText().toString().trim());
-                tv.setText(s);
+                String[] temp = weather.callWeatherData(et.getText().toString().trim());
+                tv.setText(translator.translation(temp[0].toString()) + " " + temp[1].toString() + '\u2103' + " " + temp[2].toString());
             }
         });
-
     }
-
 }

@@ -46,7 +46,6 @@ public class Translator {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
         return null;
     }
