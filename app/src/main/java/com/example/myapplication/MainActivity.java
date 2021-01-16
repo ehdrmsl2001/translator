@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -27,7 +28,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv;
+    EditText et;
     Button bt;
+    Translator translator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.text);
         bt = findViewById(R.id.button);
-
+        et = findViewById(R.id.et);
+        translator = new Translator();
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Translator translator = new Translator();
-                String s = translator.translation("paris");
+                String s = translator.translation(et.getText().toString().trim());
                 tv.setText(s);
             }
         });
